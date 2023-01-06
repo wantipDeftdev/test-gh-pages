@@ -16,4 +16,5 @@ jobs:
     # subsequent git commands will pick them up automatically
     - uses: actions/checkout@v2
     - run: |
+        npm i
         npm run deploy
