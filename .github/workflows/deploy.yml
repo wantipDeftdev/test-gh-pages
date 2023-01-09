@@ -1,0 +1,32 @@
+# This is a basic workflow that is manually triggered
+
+name: Deploy workflow
+
+on:
+  push:
+    branches:
+      - 'main'
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  deploy:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # the checkout action persists the passed credentials by default
+      # subsequent git commands will pick them up automatically
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: Install dependencies
+        run: npm install
+      - name: Publish github pages
+        run: |
+          git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/wantipDeftdev/test-gh-pages.git
+          npm run deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.DEPLOY_PAGE_TOKEN }}
