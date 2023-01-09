@@ -27,6 +27,6 @@ jobs:
       - name: Publish github pages
         run: |
           git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/wantipDeftdev/test-gh-pages.git
-          npm run gh-pages -- -u "github-actions-bot <support+actions@github.com>"
+          npm run deploy
         env:
           GITHUB_TOKEN: ${{ secrets.DEPLOY_PAGE_TOKEN }}
