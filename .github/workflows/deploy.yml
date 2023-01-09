@@ -26,7 +26,9 @@ jobs:
         run: npm install
       - name: Publish github pages
         run: |
-          git remote set-url origin https://wantip.a:${GITHUB_TOKEN}@github.com/wantipDeftdev/test-gh-pages.git
+          git remote set-url origin https://${GITHUB_TOKEN}@github.com/wantipDeftdev/test-gh-pages.git
+          git config --global user.name 'Github Action'
+          git config --global user.email 'githubaction@users.noreply.github.com'
           npm run deploy
         env:
           GITHUB_TOKEN: ${{ secrets.DEPLOY_PAGE_TOKEN }}
